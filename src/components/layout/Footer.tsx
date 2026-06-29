@@ -58,9 +58,7 @@ export function Footer() {
             <h3 className="text-sm font-semibold uppercase tracking-eyebrow text-white/45">Company</h3>
             <ul className="mt-4 space-y-2.5 text-sm">
               <li><Link href="/#why" className="hover:text-accent-400">Why Diamond</Link></li>
-              <li><Link href="/#team" className="hover:text-accent-400">Meet the team</Link></li>
-              <li><Link href="/#area" className="hover:text-accent-400">Service area</Link></li>
-              <li><Link href="/#reviews" className="hover:text-accent-400">Reviews</Link></li>
+              <li><Link href="/#process" className="hover:text-accent-400">How we work</Link></li>
               <li><Link href="/#faq" className="hover:text-accent-400">FAQ</Link></li>
             </ul>
             <h3 className="mt-6 text-sm font-semibold uppercase tracking-eyebrow text-white/45">Hours</h3>
@@ -113,10 +111,12 @@ export function Footer() {
         {/* Legal */}
         <div className="mt-8 flex flex-col gap-2 border-t border-white/10 pt-6 text-xs text-white/45 sm:flex-row sm:items-center sm:justify-between">
           <p>© {/* year fixed at build to keep static */}2026 {site.legalName}. All rights reserved.</p>
-          <p className="flex flex-wrap gap-x-4 gap-y-1">
-            <span>{site.licence.council}</span>
-            <span>{site.licence.pirz}</span>
-          </p>
+          {(site.licence.council || site.licence.pirz) && (
+            <p className="flex flex-wrap gap-x-4 gap-y-1">
+              {site.licence.council && <span>{site.licence.council}</span>}
+              {site.licence.pirz && <span>{site.licence.pirz}</span>}
+            </p>
+          )}
         </div>
       </div>
     </footer>

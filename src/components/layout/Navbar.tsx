@@ -14,8 +14,6 @@ const NAV = [
   { label: 'Services', href: '/#services' },
   { label: 'Why us', href: '/#why' },
   { label: 'How we work', href: '/#process' },
-  { label: 'Service area', href: '/#area' },
-  { label: 'Reviews', href: '/#reviews' },
 ];
 
 export function Navbar() {
@@ -23,80 +21,86 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    const onScroll = () => setScrolled(window.scrollY > 40);
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // Lock body scroll when the mobile sheet is open.
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
   }, [open]);
 
   return (
-    <header
-      className={cn(
-        'fixed inset-x-0 top-0 z-40 transition-all duration-300',
-        scrolled ? 'border-b border-line bg-paper/85 shadow-nav backdrop-blur-md' : 'border-b border-transparent bg-transparent',
-      )}
-    >
-      <nav className="container-px flex h-16 items-center justify-between gap-4 sm:h-[72px]">
-        <Link href="/" aria-label={`${site.name} home`} className="rounded-lg">
+    <header className="fixed inset-x-0 top-0 z-40 px-3 pt-3 sm:px-5 sm:pt-4">
+      {/* Floating liquid-glass pill — transparent, refracts whatever is behind it. */}
+      <nav
+        className={cn(
+          'relative mx-auto flex h-14 max-w-content items-center justify-between gap-4 rounded-full px-3 pl-4 transition-all duration-300 sm:h-16 sm:px-4 sm:pl-6',
+          scrolled
+            ? 'border border-line bg-cream/70 shadow-nav backdrop-blur-xl supports-[backdrop-filter]:bg-cream/60'
+            : 'border border-white/15 bg-white/[0.06] backdrop-blur-md',
+        )}
+      >
+        {/* Specular top edge */}
+        <span
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 top-0 h-px rounded-full"
+          style={{ background: 'linear-gradient(90deg, transparent, rgba(255,255,255,.5), transparent)' }}
+        />
+
+        <Link href="/" aria-label={`${site.name} home`} className="relative z-10 rounded-lg">
           <Logo tone={scrolled ? 'dark' : 'light'} />
         </Link>
 
-        <ul className="hidden items-center gap-1 lg:flex">
+        <ul className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-7 lg:flex">
           {NAV.map((item) => (
             <li key={item.href}>
               <Link
                 href={item.href}
                 className={cn(
-                  'rounded-full px-3.5 py-2 text-sm font-medium transition-colors',
-                  scrolled ? 'text-muted hover:text-ink hover:bg-cloud' : 'text-white/80 hover:text-white hover:bg-white/10',
+                  'group relative text-sm font-medium transition-colors',
+                  scrolled ? 'text-muted hover:text-ink' : 'text-white/85 hover:text-white',
                 )}
               >
                 {item.label}
+                <span className={cn('absolute -bottom-1.5 left-0 h-px w-0 transition-all duration-300 group-hover:w-full', scrolled ? 'bg-ink' : 'bg-white')} />
               </Link>
             </li>
           ))}
         </ul>
 
-        <div className="hidden items-center gap-2 sm:flex">
-          <Button asChild variant={scrolled ? 'ghost' : 'outline'} size="sm">
-            <a href={`tel:${site.phoneE164}`} className="tnum">
-              <Icon name="phone" width={16} height={16} /> {site.phoneDisplay}
-            </a>
-          </Button>
+        <div className="relative z-10 hidden items-center gap-2 sm:flex">
+          <a
+            href={`tel:${site.phoneE164}`}
+            className={cn('inline-flex items-center gap-2 rounded-full px-3.5 py-2 text-sm font-medium tnum transition-colors', scrolled ? 'text-ink hover:bg-ink/5' : 'text-white/85 hover:text-white hover:bg-white/10')}
+          >
+            <Icon name="phone" width={16} height={16} /> {site.phoneDisplay}
+          </a>
           <QuoteButton size="sm" source="navbar" withArrow={false}>Free quote</QuoteButton>
         </div>
 
-        {/* Mobile actions */}
-        <div className="flex items-center gap-2 sm:hidden">
-          <Button asChild variant="emergency" size="sm">
-            <a href={`tel:${site.phoneE164}`} aria-label="Call now">
-              <Icon name="phone" width={16} height={16} /> Call
-            </a>
-          </Button>
+        {/* Mobile */}
+        <div className="relative z-10 flex items-center gap-2 sm:hidden">
+          <QuoteButton size="sm" source="navbar-mobile" withArrow={false}>Quote</QuoteButton>
           <button
             onClick={() => setOpen(true)}
             aria-label="Open menu"
-            className={cn('grid h-10 w-10 place-items-center rounded-full', scrolled ? 'text-ink hover:bg-cloud' : 'text-white hover:bg-white/10')}
+            className={cn('grid h-10 w-10 place-items-center rounded-full', scrolled ? 'text-ink hover:bg-ink/5' : 'text-white hover:bg-white/10')}
           >
             <Icon name="menu" width={22} height={22} />
           </button>
         </div>
       </nav>
 
-      {/* Mobile sheet */}
       <AnimatePresence>
         {open && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-navy-950/50 backdrop-blur-sm lg:hidden"
+            className="fixed inset-0 z-50 bg-navy-950/55 backdrop-blur-sm lg:hidden"
             onClick={() => setOpen(false)}
           >
             <motion.div
@@ -104,19 +108,19 @@ export function Navbar() {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', stiffness: 320, damping: 34 }}
-              className="absolute right-0 top-0 flex h-full w-[82%] max-w-sm flex-col bg-paper p-6"
+              className="absolute right-0 top-0 flex h-full w-[84%] max-w-sm flex-col bg-cream p-6"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex items-center justify-between">
                 <Logo />
-                <button onClick={() => setOpen(false)} aria-label="Close menu" className="grid h-10 w-10 place-items-center rounded-full text-muted hover:bg-cloud">
+                <button onClick={() => setOpen(false)} aria-label="Close menu" className="grid h-10 w-10 place-items-center rounded-full text-muted hover:bg-ink/5">
                   <Icon name="close" width={22} height={22} />
                 </button>
               </div>
               <ul className="mt-8 flex flex-col gap-1">
                 {NAV.map((item) => (
                   <li key={item.href}>
-                    <Link href={item.href} onClick={() => setOpen(false)} className="block rounded-card px-4 py-3 text-lg font-medium text-ink hover:bg-cloud">
+                    <Link href={item.href} onClick={() => setOpen(false)} className="block rounded-card px-4 py-3 text-lg font-medium text-ink hover:bg-ink/5">
                       {item.label}
                     </Link>
                   </li>

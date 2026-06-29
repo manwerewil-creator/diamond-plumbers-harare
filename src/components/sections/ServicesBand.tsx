@@ -8,6 +8,17 @@ import { Icon } from '@/components/icons';
 import { services } from '@/lib/content';
 import { serviceImages } from '@/lib/images';
 import { staggerContainer, staggerItem, viewportOnce } from '@/lib/motion';
+import { cn } from '@/lib/utils';
+
+// Bento spans — one big feature tile, two squares, three wide tiles.
+const SPANS = [
+  'sm:col-span-2 lg:col-span-2 lg:row-span-2', // emergency — feature
+  'lg:col-span-1',
+  'lg:col-span-1',
+  'sm:col-span-2 lg:col-span-2',
+  'sm:col-span-2 lg:col-span-2',
+  'sm:col-span-2 lg:col-span-2',
+];
 
 export function ServicesBand() {
   return (
@@ -19,52 +30,55 @@ export function ServicesBand() {
           intro="One team for the 11pm emergency and the planned bathroom refit. Tap any service for symptoms, process and pricing."
         />
 
-        <motion.ul
-          variants={staggerContainer(0.1)}
+        <motion.div
+          variants={staggerContainer(0.08)}
           initial="hidden"
           whileInView="show"
           viewport={viewportOnce}
-          className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
+          className="mt-12 grid auto-rows-[220px] grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4"
         >
-          {services.map((s) => {
+          {services.map((s, i) => {
             const photo = serviceImages[s.slug];
+            const featured = i === 0;
             return (
-              <motion.li key={s.slug} variants={staggerItem}>
+              <motion.div key={s.slug} variants={staggerItem} className={cn('min-h-[220px]', SPANS[i])}>
                 <Link
                   href={`/services/${s.slug}`}
-                  className="group card-surface relative flex h-full flex-col overflow-hidden p-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+                  className="group relative flex h-full w-full flex-col justify-end overflow-hidden rounded-panel border border-line transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-lift focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
                 >
-                  <div className="relative aspect-[16/10] overflow-hidden">
-                    <Image
-                      src={photo.src}
-                      alt={photo.alt}
-                      fill
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-navy-950/45 to-transparent" />
-                    <span className="absolute left-4 top-4 grid h-11 w-11 place-items-center rounded-card bg-cream/90 text-ink backdrop-blur-sm">
-                      <Icon name={s.icon} width={24} height={24} />
+                  <Image
+                    src={photo.src}
+                    alt={photo.alt}
+                    fill
+                    sizes={featured ? '(max-width:1024px) 100vw, 50vw' : '(max-width:640px) 100vw, (max-width:1024px) 50vw, 25vw'}
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/45 to-navy-950/5" />
+
+                  <span className="absolute left-5 top-5 grid h-11 w-11 place-items-center rounded-card bg-cream/90 text-ink backdrop-blur-sm">
+                    <Icon name={s.icon} width={22} height={22} />
+                  </span>
+                  {s.emergency && (
+                    <span className="absolute right-5 top-5 inline-flex items-center gap-1.5 rounded-full bg-emergency px-2.5 py-1 text-xs font-semibold text-white">
+                      <span className="h-1.5 w-1.5 rounded-full bg-white" /> 24/7
                     </span>
-                    {s.emergency && (
-                      <span className="absolute right-4 top-4 inline-flex items-center gap-1.5 rounded-full bg-emergency px-2.5 py-1 text-xs font-semibold text-white">
-                        <span className="h-1.5 w-1.5 rounded-full bg-white" /> 24/7
-                      </span>
-                    )}
-                  </div>
-                  <div className="flex flex-1 flex-col p-6">
-                    <h3 className="font-display text-xl font-semibold text-ink">{s.title}</h3>
-                    <p className="mt-2 flex-1 text-[15px] leading-relaxed text-muted">{s.short}</p>
-                    <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-ink">
+                  )}
+
+                  <div className="relative z-10 p-5 text-white sm:p-6">
+                    <h3 className={cn('font-display font-semibold leading-tight', featured ? 'text-2xl sm:text-3xl' : 'text-xl')}>
+                      {s.title}
+                    </h3>
+                    {featured && <p className="mt-2 max-w-sm text-[15px] leading-relaxed text-white/80">{s.short}</p>}
+                    <span className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-white/90">
                       Learn more
-                      <Icon name="arrow" width={16} height={16} className="text-accent-600 transition-transform duration-300 group-hover:translate-x-1" />
+                      <Icon name="arrow" width={16} height={16} className="transition-transform duration-300 group-hover:translate-x-1" />
                     </span>
                   </div>
                 </Link>
-              </motion.li>
+              </motion.div>
             );
           })}
-        </motion.ul>
+        </motion.div>
       </div>
     </section>
   );

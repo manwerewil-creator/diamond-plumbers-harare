@@ -31,20 +31,12 @@ export function Hero() {
       <HeroBackground />
 
       <div className="container-px relative z-10">
-        <div className="max-w-3xl">
-          <motion.p variants={fadeUp} custom={0.05} initial="hidden" animate="show" className="eyebrow text-accent-400">
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-live-dot rounded-full bg-accent-400" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-accent-400" />
-            </span>
-            Harare’s 24/7 plumbing emergency team
-          </motion.p>
-
+        <div className="mx-auto max-w-3xl text-center">
           <AnimatedHeadline
             prefix="We fix"
             phrases={HERO_PHRASES}
-            className="mt-5 font-display text-display-lg font-semibold text-white"
-            tailClassName="mt-1"
+            className="font-display text-display-lg font-semibold text-white"
+            tailClassName="mt-1 justify-center"
             tailColorClass="text-[#EBCDA4]"
           />
 
@@ -53,11 +45,11 @@ export function Hero() {
             custom={0.25}
             initial="hidden"
             animate="show"
-            className="mt-6 max-w-xl text-lg leading-relaxed text-white/75"
+            className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-white/80"
           >
             From a midnight burst pipe to a full bathroom refit, we show up, fix it properly, and
-            guarantee the work. Licensed Harare plumbers, average arrival{' '}
-            <span className="font-semibold text-white">47 minutes</span>.
+            guarantee the work. Licensed Harare plumbers,{' '}
+            <span className="font-semibold text-white">fast same-day response</span>.
           </motion.p>
 
           {/* CTAs */}
@@ -66,27 +58,26 @@ export function Hero() {
             custom={0.4}
             initial="hidden"
             animate="show"
-            className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center"
+            className="mt-9 flex flex-col items-center gap-3 sm:flex-row sm:justify-center"
           >
-            <MagneticButton>
-              <QuoteButton size="xl" source="hero" className="w-full sm:w-auto">
+            <MagneticButton className="w-full sm:w-auto">
+              <QuoteButton size="xl" source="hero" className="w-full sm:w-[260px]">
                 Get a free quote
               </QuoteButton>
             </MagneticButton>
 
-            <Button asChild variant="emergency" size="xl" className="w-full sm:w-auto">
+            <Button asChild variant="emergency" size="xl" className="w-full sm:w-[260px]">
               <a href={`tel:${site.phoneE164}`} aria-label={`Emergency, call ${site.phoneDisplay}`}>
                 <span className="relative mr-1 flex h-2.5 w-2.5">
                   <span className="absolute inline-flex h-full w-full animate-live-dot rounded-full bg-white/90" />
                   <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-white" />
                 </span>
                 Emergency? Call now
-                <span className="ml-1 hidden font-normal text-white/80 sm:inline tnum">{site.phoneDisplay}</span>
               </a>
             </Button>
           </motion.div>
 
-          <motion.p variants={fadeUp} custom={0.5} initial="hidden" animate="show" className="mt-3 text-sm text-white/55">
+          <motion.p variants={fadeUp} custom={0.5} initial="hidden" animate="show" className="mt-3 text-sm text-white/60">
             No call-out games. Fixed written price before we start.
           </motion.p>
 

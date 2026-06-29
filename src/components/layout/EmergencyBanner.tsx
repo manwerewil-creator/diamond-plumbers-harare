@@ -60,7 +60,7 @@ export function EmergencyBanner() {
               >
                 WhatsApp now
               </a>
-              <span className="hidden sm:inline"> — average arrival 47 min.</span>
+              <span className="hidden sm:inline"> — we answer 24/7.</span>
             </p>
             <button
               onClick={dismiss}

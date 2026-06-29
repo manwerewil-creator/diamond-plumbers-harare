@@ -128,9 +128,6 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
                     <h3 className="mt-1 font-display text-lg font-semibold text-ink">{c.title}</h3>
                     <p className="mt-2 text-[15px] leading-relaxed text-muted">{c.problem}</p>
                     <p className="mt-2 text-[15px] leading-relaxed text-ink"><span className="font-semibold">Fix:</span> {c.fix}</p>
-                    <blockquote className="mt-4 border-l-2 border-accent pl-3 text-sm italic text-muted">
-                      “{c.quote.text}” <span className="not-italic font-semibold">— {c.quote.name}</span>
-                    </blockquote>
                   </div>
                 </article>
               ))}

@@ -8,35 +8,32 @@ import { cn } from '@/lib/utils';
 
 const GLYPHS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ#%&/<>*+';
 
-/* ── Per-character motion ──────────────────────────────────────────────────
- * Entrance: characters fall from above, blur(8px)→0, land with a springy
- *           overshoot, staggered 25ms.
- * Exit:     characters fly upward and fade, staggered 30ms, expo-out feel.
- */
-const tailContainer: Variants = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.025 } },
-  exit: { transition: { staggerChildren: 0.03 } },
-};
-
+/* Per-character motion. Delay is driven by the character's global index so the
+   stagger flows across the whole phrase even though characters are grouped into
+   non-breaking words. */
 const charVariant: Variants = {
-  hidden: { y: '-0.6em', opacity: 0, filter: 'blur(8px)' },
-  show: {
+  hidden: { y: '-0.55em', opacity: 0, filter: 'blur(8px)' },
+  show: (i: number) => ({
     y: 0,
     opacity: 1,
     filter: 'blur(0px)',
-    transition: { type: 'spring', stiffness: 540, damping: 22, mass: 0.6 },
-  },
-  exit: {
-    y: '-0.9em',
+    transition: { type: 'spring', stiffness: 520, damping: 22, mass: 0.6, delay: i * 0.025 },
+  }),
+  exit: (i: number) => ({
+    y: '-0.85em',
     opacity: 0,
     filter: 'blur(4px)',
-    transition: { duration: 0.42, ease: expoOut },
-  },
+    transition: { duration: 0.4, ease: expoOut, delay: i * 0.018 },
+  }),
 };
 
-function splitChars(text: string) {
-  return text.split('').map((ch, i) => ({ ch: ch === ' ' ? ' ' : ch, key: `${i}-${ch}` }));
+/** Split into words (kept on one line) of indexed characters. */
+function splitWords(text: string) {
+  let idx = 0;
+  return text.split(' ').map((word, w) => ({
+    key: `${w}-${word}`,
+    chars: word.split('').map((ch) => ({ ch, index: idx++ })),
+  }));
 }
 
 export function AnimatedHeadline({
@@ -61,12 +58,9 @@ export function AnimatedHeadline({
   const [scrambled, setScrambled] = useState(phrases[0]);
   const startedRef = useRef(false);
 
-  // Avoid hydration mismatch: render the plain first phrase on the server,
-  // then take over on the client.
   useEffect(() => setMounted(true), []);
 
-  /* First-load scramble-reveal of the first phrase (~600ms), then hand off
-     to the rotator. Runs once. */
+  /* First-load scramble-reveal of the first phrase (~600ms). */
   useEffect(() => {
     if (!mounted || reduced || startedRef.current) return;
     startedRef.current = true;
@@ -76,12 +70,11 @@ export function AnimatedHeadline({
     let elapsed = 0;
     const id = setInterval(() => {
       elapsed += tick;
-      const progress = elapsed / total;
-      const revealCount = Math.floor(progress * target.length);
+      const revealCount = Math.floor((elapsed / total) * target.length);
       const next = target
         .split('')
         .map((c, i) => {
-          if (c === ' ' || c === '.' ) return c;
+          if (c === ' ' || c === '.') return c;
           if (i < revealCount) return c;
           return GLYPHS[Math.floor(((elapsed + i * 7) / tick) % GLYPHS.length)];
         })
@@ -96,12 +89,10 @@ export function AnimatedHeadline({
     return () => clearInterval(id);
   }, [mounted, reduced, phrases]);
 
-  /* Rotate phrases once the scramble has handed off. */
+  /* Rotate phrases. */
   useEffect(() => {
     if (!mounted || phase !== 'rotating') return;
-    const id = setInterval(() => {
-      setIndex((i) => (i + 1) % phrases.length);
-    }, intervalMs);
+    const id = setInterval(() => setIndex((i) => (i + 1) % phrases.length), intervalMs);
     return () => clearInterval(id);
   }, [mounted, phase, phrases.length, intervalMs]);
 
@@ -109,31 +100,24 @@ export function AnimatedHeadline({
     <span
       aria-hidden
       className={cn(
-        'ml-1 inline-block h-[0.86em] w-[3px] translate-y-[0.08em] rounded-full bg-accent align-baseline',
+        'ml-1.5 inline-block h-[0.82em] w-[3px] translate-y-[0.06em] rounded-full bg-current align-baseline opacity-80',
         !reduced && 'animate-cursor-pulse',
       )}
     />
   );
 
-  // ── Reduced motion / not yet mounted: simple, accessible cross-fade ───────
+  // Reduced motion / pre-hydration: simple cross-fade.
   if (reduced || !mounted) {
     return (
       <h1 className={className}>
         <span className="block">{prefix}</span>
         <span className={cn('relative inline-flex items-baseline', tailClassName)}>
           <AnimatePresence mode="wait">
-            <motion.span
-              key={index}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className={tailColorClass}
-            >
+            <motion.span key={index} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }} className={tailColorClass}>
               {phrases[index]}
             </motion.span>
           </AnimatePresence>
-          {Cursor}
+          <span className={tailColorClass}>{Cursor}</span>
         </span>
       </h1>
     );
@@ -142,7 +126,7 @@ export function AnimatedHeadline({
   return (
     <h1 className={className}>
       <span className="block">{prefix}</span>
-      <span className={cn('relative inline-flex flex-wrap items-baseline', tailClassName)}>
+      <span className={cn('relative block', tailClassName)}>
         <span className="sr-only">{phrases[index]}</span>
 
         {phase === 'scramble' ? (
@@ -152,21 +136,25 @@ export function AnimatedHeadline({
             <motion.span
               key={index}
               aria-hidden
-              className={`${tailColorClass} inline-flex flex-wrap items-baseline will-blur`}
-              variants={tailContainer}
+              className={cn(tailColorClass, 'inline')}
               initial="hidden"
               animate="show"
               exit="exit"
             >
-              {splitChars(phrases[index]).map(({ ch, key }) => (
-                <motion.span key={key} variants={charVariant} className="inline-block will-blur" style={{ whiteSpace: 'pre' }}>
-                  {ch}
-                </motion.span>
+              {splitWords(phrases[index]).map((word, w) => (
+                <span key={word.key} className="inline-flex whitespace-nowrap">
+                  {w > 0 && <span className="whitespace-pre"> </span>}
+                  {word.chars.map(({ ch, index: i }) => (
+                    <motion.span key={`${word.key}-${i}`} custom={i} variants={charVariant} className="inline-block will-blur">
+                      {ch}
+                    </motion.span>
+                  ))}
+                </span>
               ))}
             </motion.span>
           </AnimatePresence>
         )}
-        {Cursor}
+        <span className={cn('inline-block', tailColorClass)}>{Cursor}</span>
       </span>
     </h1>
   );

@@ -26,8 +26,8 @@
 
   body {
     @apply bg-cream text-ink font-sans antialiased;
-    font-size: 17px;
-    line-height: 1.55;
+    font-size: 18px;
+    line-height: 1.6;
     text-rendering: optimizeLegibility;
   }
 
@@ -86,6 +86,17 @@
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+  }
+
+  /* Hero veil — center-weighted wash that keeps the photo clear while holding
+     white text crisp over the middle of the frame. */
+  .hero-veil {
+    background: radial-gradient(
+      ellipse at center,
+      rgba(22, 14, 8, 0.42) 0%,
+      rgba(22, 14, 8, 0.24) 42%,
+      rgba(22, 14, 8, 0.82) 100%
+    );
   }
 
   /* Glossy black pill — used by the primary CTA (matches Rylo's .btn--ink). */

@@ -13,13 +13,15 @@ import type { IconName } from '@/components/icons';
 
 /* ─────────────────────────────  STATS  ───────────────────────────── */
 
-export type Stat = { value: number; suffix?: string; prefix?: string; label: string };
+// Honest, policy-true trust signals (no fabricated metrics). Edit freely —
+// add real numbers (years, jobs completed) here once you can stand behind them.
+export type Stat = { top: string; label: string };
 
 export const heroStats: Stat[] = [
-  { value: 12, suffix: '', label: 'years in Harare' },
-  { value: 3200, suffix: '+', label: 'jobs completed' },
-  { value: 47, suffix: ' min', label: 'average arrival' },
-  { value: 1, suffix: '-year', label: 'workmanship guarantee' },
+  { top: '24/7', label: 'Emergency response' },
+  { top: 'Fixed', label: 'Written quotes, no surprises' },
+  { top: 'Licensed', label: 'Registered & insured' },
+  { top: '1-year', label: 'Workmanship guarantee' },
 ];
 
 /* ─────────────────────────────  SERVICES  ───────────────────────────── */
@@ -60,7 +62,7 @@ export const services: Service[] = [
     ],
     process: [
       { title: 'Call or WhatsApp', detail: 'Tell us what is broken. We talk you through the shut-off valve immediately to stop the damage.' },
-      { title: 'We mobilise', detail: 'Nearest on-call technician is dispatched — average arrival 47 minutes inside Harare metro.' },
+      { title: 'We mobilise', detail: 'The nearest on-call technician is dispatched straight away, and we keep you posted with an honest ETA.' },
       { title: 'Stabilise & fix', detail: 'We isolate the leak, make it safe, then carry out the permanent repair with parts on the van.' },
       { title: 'Guarantee', detail: 'Written 1-year workmanship guarantee before we leave. No surprise charges.' },
     ],
@@ -235,7 +237,7 @@ export const whyUs: TrustCard[] = [
   {
     icon: 'clock',
     title: 'Same-day in Harare',
-    body: 'Average arrival 47 minutes within the Harare metro. Real technicians, real vans, on call when your pipe doesn’t care that it’s 11pm.',
+    body: 'Real technicians, real vans, on call across the Harare metro when your pipe doesn’t care that it’s 11pm. We give you an honest ETA, then turn up.',
   },
   {
     icon: 'tag',
@@ -408,7 +410,7 @@ export const cityCenter = { name: 'Harare CBD', lng: 31.0534, lat: -17.8292 };
 
 export const faqs: { q: string; a: string }[] = [
   { q: 'Do you respond at night and on weekends?', a: 'Yes. Our emergency line is staffed 24/7, including weekends and public holidays. For genuine emergencies — burst pipes, flooding, sewage — we dispatch the nearest on-call technician straight away.' },
-  { q: 'How fast can you actually get here?', a: 'Average arrival inside the Harare metro is 47 minutes. Exact time depends on where you are and traffic, but we’ll give you an honest ETA when you call — not a vague “sometime today”.' },
+  { q: 'How fast can you actually get here?', a: 'It depends where you are and the traffic, but for genuine emergencies we dispatch the nearest on-call technician straight away and give you an honest ETA when you call — not a vague “sometime today”.' },
   { q: 'Is the quote really free?', a: 'Yes. We quote a fixed price in writing before any work starts, at no charge. For emergencies we confirm the call-out cost up front so there are no surprises.' },
   { q: 'Do you accept EcoCash, OneMoney and cards?', a: 'We accept USD cash, Visa, Mastercard, EcoCash, OneMoney, ZIPIT and Paynow. Pay whichever way is easiest for you.' },
   { q: 'Do you guarantee your work?', a: 'Every job carries a written 1-year workmanship guarantee, plus 6 months on parts we supply. If something we fixed fails in that time, we come back and put it right at no cost.' },

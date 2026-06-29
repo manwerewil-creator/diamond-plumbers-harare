@@ -25,19 +25,19 @@ export function SectionHeading({
       initial="hidden"
       whileInView="show"
       viewport={viewportOnce}
-      className={cn('max-w-2xl', align === 'center' && 'mx-auto text-center', className)}
+      className={cn('max-w-3xl', align === 'center' && 'mx-auto text-center', className)}
     >
       {eyebrow && <p className={cn('eyebrow', align === 'center' && 'justify-center')}>{eyebrow}</p>}
       <h2
         className={cn(
-          'mt-3 font-display text-3xl font-semibold leading-tight sm:text-4xl lg:text-[44px]',
+          'mt-3 font-display text-4xl font-semibold leading-tight sm:text-5xl lg:text-[54px]',
           tone === 'light' ? 'text-white' : 'text-ink',
         )}
       >
         {title}
       </h2>
       {intro && (
-        <p className={cn('mt-4 text-lg leading-relaxed', tone === 'light' ? 'text-white/70' : 'text-muted')}>
+        <p className={cn('mt-5 text-xl leading-relaxed', tone === 'light' ? 'text-white/70' : 'text-muted')}>
           {intro}
         </p>
       )}

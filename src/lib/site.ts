@@ -38,10 +38,11 @@ export const site = {
     emergency: '24/7 emergency line',
   },
 
-  // REPLACE_WITH_REAL_LICENCE — Harare City Council plumbing licence
+  // Add your real registration numbers here and they'll show in the footer.
+  // Left empty so nothing fake is published.
   licence: {
-    council: 'HCC Plumbing Licence No. HRE/PL/0000', // REPLACE
-    pirz: 'PIRZ Reg. No. 0000', // Plumbing Industry — REPLACE
+    council: process.env.NEXT_PUBLIC_LICENCE_COUNCIL || '',
+    pirz: process.env.NEXT_PUBLIC_LICENCE_PIRZ || '',
   },
 
   url: process.env.NEXT_PUBLIC_SITE_URL || 'https://diamondplumbers.co.zw',

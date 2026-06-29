@@ -11,8 +11,9 @@ const buttonVariants = cva(
     variants: {
       variant: {
         // Primary CTA — glossy black pill (the signature). The default "do this".
+        // Warm-black gradient + a top specular highlight (::before) read as glass.
         primary:
-          'bg-coal text-white shadow-ink ring-coal border border-white/10 hover:-translate-y-0.5 hover:bg-coal-soft hover:shadow-inkHover',
+          'relative isolate overflow-hidden border border-white/10 bg-gradient-to-b from-[#2a1f15] to-coal text-white shadow-ink ring-coal hover:-translate-y-0.5 hover:shadow-inkHover before:pointer-events-none before:absolute before:inset-x-0 before:top-0 before:h-1/2 before:bg-gradient-to-b before:from-white/20 before:to-transparent before:opacity-90',
         // EMERGENCY ONLY — warm rust. Never use this variant for anything else.
         emergency:
           'bg-emergency text-white shadow-emergencyGlow ring-emergency hover:-translate-y-0.5 hover:bg-emergency-dark',

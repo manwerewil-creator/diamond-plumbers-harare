@@ -163,10 +163,6 @@ function CaseStudyModal({ caseStudy, onClose }: { caseStudy: CaseStudy | null; o
                 <Icon name="clock" width={16} height={16} className="text-accent-600" />
                 <span className="font-semibold">{caseStudy.time}</span>
               </div>
-              <blockquote className="rounded-card border-l-2 border-accent bg-mist p-4 italic text-ink">
-                “{caseStudy.quote.text}”
-                <footer className="mt-2 text-sm font-semibold not-italic text-muted">— {caseStudy.quote.name}</footer>
-              </blockquote>
             </div>
             <QuoteButton service={caseStudy.service} source={`case-${caseStudy.id}`} size="lg" className="mt-2 w-full">
               Get a quote for a job like this

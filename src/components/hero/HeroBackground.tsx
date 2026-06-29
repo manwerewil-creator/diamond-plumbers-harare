@@ -45,10 +45,11 @@ export function HeroBackground({ photo = heroImage }: { photo?: Photo }) {
         />
       </motion.div>
 
-      {/* Warm espresso wash — keeps white headline crisp over any photo. */}
-      <div className="absolute inset-0 bg-gradient-to-b from-navy-950/80 via-navy-900/55 to-navy-950/92" />
-      <div className="absolute inset-0 bg-gradient-to-r from-navy-950/75 via-navy-950/20 to-transparent" />
-      <div className="absolute inset-0 bg-grid opacity-30" />
+      {/* Lighter, center-weighted veil — lets the photo read clearly while
+          keeping the centered white headline crisp. */}
+      <div className="absolute inset-0 bg-navy-950/15" />
+      <div className="absolute inset-0 hero-veil" />
+      <div className="absolute inset-0 bg-grid opacity-20" />
     </div>
   );
 }
