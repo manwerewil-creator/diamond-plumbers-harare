@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Sora, Inter } from 'next/font/google';
+import { Inter_Tight } from 'next/font/google';
 import Script from 'next/script';
 import './globals.css';
 import { site } from '@/lib/site';
@@ -11,14 +11,15 @@ import { Footer } from '@/components/layout/Footer';
 import { EmergencyBanner } from '@/components/layout/EmergencyBanner';
 import { WhatsAppFloat } from '@/components/layout/WhatsAppFloat';
 
-const display = Sora({
+// Single typeface site-wide (Rylo Labz approach): Inter Tight at varying weights.
+const display = Inter_Tight({
   subsets: ['latin'],
   weight: ['500', '600', '700'],
   variable: '--font-display',
   display: 'swap',
 });
 
-const sans = Inter({
+const sans = Inter_Tight({
   subsets: ['latin'],
   weight: ['400', '500', '600'],
   variable: '--font-sans',

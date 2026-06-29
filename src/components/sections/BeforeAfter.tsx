@@ -1,12 +1,13 @@
 'use client';
 
 import { useRef, useState } from 'react';
+import Image from 'next/image';
 import { motion, useMotionValue, useMotionTemplate, useTransform, animate } from 'framer-motion';
 import { SectionHeading } from '@/components/SectionHeading';
-import { PhotoPlaceholder } from '@/components/PhotoPlaceholder';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Icon } from '@/components/icons';
 import { caseStudies, getService, type CaseStudy } from '@/lib/content';
+import { caseImages } from '@/lib/images';
 import { staggerContainer, staggerItem, viewportOnce } from '@/lib/motion';
 import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion';
 import { QuoteButton } from '@/components/quote/QuoteButton';
@@ -93,12 +94,13 @@ function Compare({ caseStudy, onOpen }: { caseStudy: CaseStudy; onOpen: () => vo
       >
         {/* AFTER (full, underneath) */}
         <div className="absolute inset-0">
-          <PhotoPlaceholder label={caseStudy.afterAlt} icon={getService(caseStudy.service)?.icon ?? 'drop'} tone="accent" />
-          <span className="absolute right-3 top-3 z-20 rounded-full bg-accent px-2.5 py-1 text-xs font-bold text-white">AFTER</span>
+          <Image src={caseImages[caseStudy.id].after.src} alt={caseImages[caseStudy.id].after.alt} fill sizes="(max-width:1024px) 100vw, 33vw" className="object-cover" />
+          <span className="absolute right-3 top-3 z-20 rounded-full bg-coal px-2.5 py-1 text-xs font-bold text-white">AFTER</span>
         </div>
         {/* BEFORE (clipped, on top) */}
         <motion.div className="absolute inset-0" style={{ clipPath: clip }}>
-          <PhotoPlaceholder label={caseStudy.beforeAlt} icon="drain" tone="navy" />
+          <Image src={caseImages[caseStudy.id].before.src} alt={caseImages[caseStudy.id].before.alt} fill sizes="(max-width:1024px) 100vw, 33vw" className="object-cover" />
+          <div className="absolute inset-0 bg-navy-950/25" />
           <span className="absolute left-3 top-3 z-20 rounded-full bg-navy-950/80 px-2.5 py-1 text-xs font-bold text-white">BEFORE</span>
         </motion.div>
         {/* Handle */}
@@ -133,8 +135,14 @@ function CaseStudyModal({ caseStudy, onClose }: { caseStudy: CaseStudy | null; o
         {caseStudy && (
           <>
             <div className="relative -mx-6 -mt-6 mb-2 grid grid-cols-2 gap-1 overflow-hidden sm:-mx-8 sm:-mt-8">
-              <div className="aspect-[4/3]"><PhotoPlaceholder label={caseStudy.beforeAlt} icon="drain" tone="navy" /></div>
-              <div className="aspect-[4/3]"><PhotoPlaceholder label={caseStudy.afterAlt} icon={getService(caseStudy.service)?.icon ?? 'drop'} tone="accent" /></div>
+              <div className="relative aspect-[4/3]">
+                <Image src={caseImages[caseStudy.id].before.src} alt={caseImages[caseStudy.id].before.alt} fill sizes="50vw" className="object-cover" />
+                <span className="absolute left-2 top-2 rounded-full bg-navy-950/80 px-2 py-0.5 text-[10px] font-bold text-white">BEFORE</span>
+              </div>
+              <div className="relative aspect-[4/3]">
+                <Image src={caseImages[caseStudy.id].after.src} alt={caseImages[caseStudy.id].after.alt} fill sizes="50vw" className="object-cover" />
+                <span className="absolute right-2 top-2 rounded-full bg-coal px-2 py-0.5 text-[10px] font-bold text-white">AFTER</span>
+              </div>
             </div>
             <DialogHeader>
               <p className="text-xs font-semibold uppercase tracking-eyebrow text-accent-600">

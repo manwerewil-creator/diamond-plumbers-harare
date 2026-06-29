@@ -4,16 +4,15 @@
 
 @layer base {
   :root {
-    --navy: #0b1f3a;
-    --accent: #0ea5e9;
-    --emergency: #f97316;
+    --ink: #221812;
+    --brown: #6b4a2f;
+    --coal: #100c09;
 
-    /* Radix/shadcn-style tokens, mapped to the Diamond palette */
-    --background: 0 0% 100%;
-    --foreground: 213 69% 14%;
-    --border: 214 32% 91%;
-    --ring: 199 89% 48%;
-    --radius: 0.75rem;
+    --background: 40 33% 96%;
+    --foreground: 24 33% 11%;
+    --border: 36 35% 85%;
+    --ring: 27 39% 30%;
+    --radius: 0.875rem;
   }
 
   * {
@@ -26,13 +25,12 @@
   }
 
   body {
-    @apply bg-paper text-ink font-sans antialiased;
+    @apply bg-cream text-ink font-sans antialiased;
     font-size: 17px;
-    line-height: 1.6;
+    line-height: 1.55;
     text-rendering: optimizeLegibility;
   }
 
-  /* Tabular numerals everywhere a price, stat or phone number appears. */
   .tnum {
     font-variant-numeric: tabular-nums;
     font-feature-settings: 'tnum' 1;
@@ -40,24 +38,25 @@
 
   h1, h2, h3, h4 {
     @apply font-display text-ink;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.02;
     text-wrap: balance;
   }
 
   ::selection {
-    background: rgba(14, 165, 233, 0.22);
-    color: var(--navy);
+    background: var(--coal);
+    color: #fff;
   }
 
-  /* Visible, on-brand focus ring for keyboard users (WCAG 2.1 AA). */
   :focus-visible {
-    outline: 2px solid var(--accent);
+    outline: 2px solid var(--brown);
     outline-offset: 2px;
     border-radius: 4px;
   }
 }
 
 @layer components {
-  /* Standard section rhythm: generous vertical breathing room. */
   .section {
     @apply py-16 sm:py-24 lg:py-[120px];
   }
@@ -68,8 +67,12 @@
   .eyebrow {
     @apply inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-eyebrow text-accent-600;
   }
+  .eyebrow-dot {
+    @apply inline-block h-1.5 w-1.5 rounded-full;
+    background: linear-gradient(120deg, #6b4a2f, #a9743f);
+  }
 
-  /* Border-first card. Elevation comes from a 1px border; shadow only on lift. */
+  /* Border-first warm card. Shadow only on lift. */
   .card-surface {
     @apply rounded-panel border border-line bg-paper transition-[transform,border-color,box-shadow] duration-300;
   }
@@ -77,25 +80,58 @@
     @apply -translate-y-1 border-accent/30 shadow-lift;
   }
 
-  /* Gradient text accent — cyan→teal, used sparingly for emphasis words. */
+  /* Brown → caramel gradient text for emphasis words. */
   .grad-text {
-    background: linear-gradient(120deg, #0ea5e9 0%, #14b8a6 100%);
+    background: linear-gradient(120deg, #6b4a2f 0%, #a9743f 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
   }
 
+  /* Glossy black pill — used by the primary CTA (matches Rylo's .btn--ink). */
+  .btn-ink {
+    background: var(--coal);
+    color: #fff;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.18) inset, 0 14px 34px -12px rgba(16, 12, 9, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
   .container-px {
-    @apply mx-auto w-full max-w-content px-5 sm:px-6 lg:px-8;
+    @apply mx-auto w-full max-w-content px-6 lg:px-8;
+  }
+
+  /* Centered section heading with flanking hairline rules (Rylo signature). */
+  .rule-flank {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
+  .rule-flank::before,
+  .rule-flank::after {
+    content: '';
+    height: 1px;
+    flex: 1;
+    max-width: 120px;
+    background: currentColor;
+    opacity: 0.18;
   }
 }
 
 @layer utilities {
-  /* Hairline grid texture for dark hero / CTA backdrops. */
+  /* Hairline grid for dark espresso sections. */
   .bg-grid {
     background-image:
-      linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+      linear-gradient(to right, rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+
+  /* Warm grid for light sections. */
+  .bg-grid-warm {
+    background-image:
+      linear-gradient(to right, rgba(107, 74, 47, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(107, 74, 47, 0.05) 1px, transparent 1px);
     background-size: 56px 56px;
   }
 
@@ -109,7 +145,6 @@
   }
 }
 
-/* ── Reduced motion: kill every non-essential animation/transition ─────────── */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

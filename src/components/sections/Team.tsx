@@ -1,10 +1,11 @@
 'use client';
 
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { SectionHeading } from '@/components/SectionHeading';
-import { PhotoPlaceholder } from '@/components/PhotoPlaceholder';
 import { Icon } from '@/components/icons';
 import { team } from '@/lib/content';
+import { teamImages } from '@/lib/images';
 import { staggerContainer, staggerItem, viewportOnce } from '@/lib/motion';
 
 export function Team() {
@@ -24,10 +25,17 @@ export function Team() {
           viewport={viewportOnce}
           className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4"
         >
-          {team.map((m) => (
+          {team.map((m, i) => (
             <motion.li key={m.name} variants={staggerItem} className="card-surface overflow-hidden p-0">
-              <div className="aspect-[4/5]">
-                <PhotoPlaceholder label={m.photoAlt} icon="wrench" tone="navy" />
+              <div className="relative aspect-[4/5] overflow-hidden">
+                <Image
+                  src={teamImages[i % teamImages.length].src}
+                  alt={teamImages[i % teamImages.length].alt}
+                  fill
+                  sizes="(max-width:640px) 100vw, (max-width:1024px) 50vw, 25vw"
+                  className="object-cover transition-transform duration-500 hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-navy-950/35 to-transparent" />
               </div>
               <div className="p-5">
                 <h3 className="font-display text-lg font-semibold text-ink">{m.name}</h3>

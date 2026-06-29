@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/button';
 import { Icon, type IconName } from '@/components/icons';
 import { site } from '@/lib/site';
 import { expoOut } from '@/lib/motion';
+import { serviceImages, heroImage } from '@/lib/images';
 
 export function ServiceHero({
   slug,
@@ -27,8 +28,8 @@ export function ServiceHero({
   emergency?: boolean;
 }) {
   return (
-    <section className="relative isolate flex min-h-[78svh] flex-col justify-center overflow-hidden pt-28 pb-14 text-white">
-      <HeroBackground />
+    <section className="relative isolate flex min-h-[72svh] flex-col justify-center overflow-hidden pt-28 pb-14 text-white">
+      <HeroBackground photo={serviceImages[slug] ?? heroImage} />
       <div className="container-px relative z-10">
         <motion.nav
           initial={{ opacity: 0, y: 8 }}
@@ -57,6 +58,7 @@ export function ServiceHero({
             phrases={rotator}
             className="mt-4 font-display text-display font-semibold text-white"
             tailClassName="mt-1 text-[0.7em]"
+            tailColorClass="text-[#EBCDA4]"
           />
 
           <motion.p initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.2, ease: expoOut }} className="mt-6 max-w-xl text-lg leading-relaxed text-white/75">

@@ -45,12 +45,14 @@ export function AnimatedHeadline({
   intervalMs = 4000,
   className,
   tailClassName,
+  tailColorClass = 'grad-text',
 }: {
   prefix: string;
   phrases: string[];
   intervalMs?: number;
   className?: string;
   tailClassName?: string;
+  tailColorClass?: string;
 }) {
   const reduced = usePrefersReducedMotion();
   const [mounted, setMounted] = useState(false);
@@ -126,6 +128,7 @@ export function AnimatedHeadline({
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
+              className={tailColorClass}
             >
               {phrases[index]}
             </motion.span>
@@ -143,13 +146,13 @@ export function AnimatedHeadline({
         <span className="sr-only">{phrases[index]}</span>
 
         {phase === 'scramble' ? (
-          <span aria-hidden className="grad-text">{scrambled}</span>
+          <span aria-hidden className={tailColorClass}>{scrambled}</span>
         ) : (
           <AnimatePresence mode="wait" initial={false}>
             <motion.span
               key={index}
               aria-hidden
-              className="grad-text inline-flex flex-wrap items-baseline will-blur"
+              className={`${tailColorClass} inline-flex flex-wrap items-baseline will-blur`}
               variants={tailContainer}
               initial="hidden"
               animate="show"

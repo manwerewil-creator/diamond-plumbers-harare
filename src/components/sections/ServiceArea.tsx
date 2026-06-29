@@ -102,7 +102,7 @@ export function ServiceArea() {
           <SectionHeading
             eyebrow="Service area"
             tone="light"
-            title={<>Covering greater Harare, <span className="grad-text">suburb by suburb.</span></>}
+            title={<>Covering greater Harare, <span className="text-[#EBCDA4]">suburb by suburb.</span></>}
             intro="Same-day response across the Harare metro. If you’re just outside the radius, call us — we’ll quote over the phone and still get to you."
           />
 

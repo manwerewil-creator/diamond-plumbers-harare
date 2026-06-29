@@ -18,7 +18,7 @@ export function Process() {
         <SectionHeading
           eyebrow="How we work"
           tone="light"
-          title={<>Four steps from <span className="grad-text">leak to guarantee.</span></>}
+          title={<>Four steps from <span className="text-[#EBCDA4]">leak to guarantee.</span></>}
           intro="No surprises, no hovering by the door wondering what it’ll cost. You always know what happens next."
         />
 

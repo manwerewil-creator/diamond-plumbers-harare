@@ -1,14 +1,15 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import Image from 'next/image';
 import { ServiceHero } from '@/components/service/ServiceHero';
 import { StickyQuoteBar } from '@/components/service/StickyQuoteBar';
-import { PhotoPlaceholder } from '@/components/PhotoPlaceholder';
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/components/ui/accordion';
 import { Icon } from '@/components/icons';
 import { QuoteButton } from '@/components/quote/QuoteButton';
 import { JsonLd } from '@/components/JsonLd';
 import { services, getService, caseStudiesForService } from '@/lib/content';
+import { caseImages } from '@/lib/images';
 import { serviceSchema, faqSchema } from '@/lib/seo';
 import { site } from '@/lib/site';
 
@@ -114,12 +115,12 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
                 <article key={c.id} className="card-surface overflow-hidden p-0">
                   <div className="grid grid-cols-2 gap-px">
                     <div className="relative aspect-[4/3]">
-                      <PhotoPlaceholder label={c.beforeAlt} icon="drain" tone="navy" />
+                      <Image src={caseImages[c.id].before.src} alt={caseImages[c.id].before.alt} fill sizes="(max-width:1024px) 50vw, 25vw" className="object-cover" />
                       <span className="absolute left-2 top-2 rounded-full bg-navy-950/80 px-2 py-0.5 text-[10px] font-bold text-white">BEFORE</span>
                     </div>
                     <div className="relative aspect-[4/3]">
-                      <PhotoPlaceholder label={c.afterAlt} icon={service.icon} tone="accent" />
-                      <span className="absolute right-2 top-2 rounded-full bg-accent px-2 py-0.5 text-[10px] font-bold text-white">AFTER</span>
+                      <Image src={caseImages[c.id].after.src} alt={caseImages[c.id].after.alt} fill sizes="(max-width:1024px) 50vw, 25vw" className="object-cover" />
+                      <span className="absolute right-2 top-2 rounded-full bg-coal px-2 py-0.5 text-[10px] font-bold text-white">AFTER</span>
                     </div>
                   </div>
                   <div className="p-6">

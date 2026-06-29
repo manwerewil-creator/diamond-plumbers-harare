@@ -10,18 +10,21 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        // Primary CTA — the single accent (deep cyan). The default "do this".
+        // Primary CTA — glossy black pill (the signature). The default "do this".
         primary:
-          'bg-accent text-white shadow-accentGlow ring-accent hover:-translate-y-0.5 hover:bg-accent-600',
-        // EMERGENCY ONLY — warm orange. Never use this variant for anything else.
+          'bg-coal text-white shadow-ink ring-coal border border-white/10 hover:-translate-y-0.5 hover:bg-coal-soft hover:shadow-inkHover',
+        // EMERGENCY ONLY — warm rust. Never use this variant for anything else.
         emergency:
           'bg-emergency text-white shadow-emergencyGlow ring-emergency hover:-translate-y-0.5 hover:bg-emergency-dark',
-        // Quiet secondary for non-urgent visitors.
+        // Quiet bordered secondary for non-urgent visitors.
         secondary:
-          'bg-white text-ink border border-line ring-accent hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-liftSoft',
-        // On dark backgrounds (hero / final CTA).
+          'bg-paper text-ink border border-ink/15 ring-accent hover:-translate-y-0.5 hover:border-ink/40 hover:shadow-liftSoft',
+        // On dark espresso backgrounds — inverts to a cream pill.
+        onDark:
+          'bg-cream text-ink shadow-ink ring-white border border-black/5 hover:-translate-y-0.5 hover:bg-white',
+        // Bordered ghost on dark backgrounds.
         outline:
-          'border border-white/25 bg-white/5 text-white ring-white hover:bg-white/10 hover:border-white/40 backdrop-blur-sm',
+          'border border-white/25 bg-white/5 text-white ring-white hover:bg-white/10 hover:border-white/45 backdrop-blur-sm',
         ghost: 'text-ink ring-accent hover:bg-cloud',
         link: 'text-accent-600 underline-offset-4 hover:underline rounded-none',
       },

@@ -1,9 +1,11 @@
 'use client';
 
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { SectionHeading } from '@/components/SectionHeading';
 import { Icon } from '@/components/icons';
 import { testimonials } from '@/lib/content';
+import { testimonialImages } from '@/lib/images';
 import { expoOut, viewportOnce } from '@/lib/motion';
 
 function Stars({ n }: { n: number }) {
@@ -41,9 +43,14 @@ export function Testimonials() {
                 <Stars n={t.rating} />
                 <blockquote className="mt-4 flex-1 text-[15px] leading-relaxed text-ink">“{t.quote}”</blockquote>
                 <figcaption className="mt-5 flex items-center gap-3 border-t border-line pt-4">
-                  <span className="grid h-11 w-11 shrink-0 place-items-center overflow-hidden rounded-full bg-navy text-sm font-bold text-white">
-                    {/* REPLACE_WITH_REAL_PHOTO — customer headshot */}
-                    {t.name.split(' ').map((p) => p[0]).join('').slice(0, 2)}
+                  <span className="relative h-11 w-11 shrink-0 overflow-hidden rounded-full bg-cloud">
+                    <Image
+                      src={testimonialImages[i % testimonialImages.length].src}
+                      alt={testimonialImages[i % testimonialImages.length].alt}
+                      fill
+                      sizes="44px"
+                      className="object-cover"
+                    />
                   </span>
                   <span>
                     <span className="block text-sm font-semibold text-ink">{t.name}</span>

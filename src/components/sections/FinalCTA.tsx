@@ -27,7 +27,7 @@ export function FinalCTA() {
         className="container-px relative text-center"
       >
         <h2 className="mx-auto max-w-3xl font-display text-4xl font-semibold leading-tight sm:text-5xl lg:text-6xl">
-          Stop fighting your pipes. <span className="grad-text">Let us.</span>
+          Stop fighting your pipes. <span className="text-[#EBCDA4]">Let us.</span>
         </h2>
         <p className="mx-auto mt-5 max-w-xl text-lg text-white/70">
           One call and it’s handled — fixed price, written guarantee, average arrival 47 minutes. The

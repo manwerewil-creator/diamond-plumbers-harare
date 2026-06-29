@@ -45,6 +45,7 @@ export function Hero() {
             phrases={HERO_PHRASES}
             className="mt-5 font-display text-display-lg font-semibold text-white"
             tailClassName="mt-1"
+            tailColorClass="text-[#EBCDA4]"
           />
 
           <motion.p
