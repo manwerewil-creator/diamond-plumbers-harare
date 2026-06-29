@@ -1,0 +1,122 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --navy: #0b1f3a;
+    --accent: #0ea5e9;
+    --emergency: #f97316;
+
+    /* Radix/shadcn-style tokens, mapped to the Diamond palette */
+    --background: 0 0% 100%;
+    --foreground: 213 69% 14%;
+    --border: 214 32% 91%;
+    --ring: 199 89% 48%;
+    --radius: 0.75rem;
+  }
+
+  * {
+    @apply border-line;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-paper text-ink font-sans antialiased;
+    font-size: 17px;
+    line-height: 1.6;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Tabular numerals everywhere a price, stat or phone number appears. */
+  .tnum {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: 'tnum' 1;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-display text-ink;
+    text-wrap: balance;
+  }
+
+  ::selection {
+    background: rgba(14, 165, 233, 0.22);
+    color: var(--navy);
+  }
+
+  /* Visible, on-brand focus ring for keyboard users (WCAG 2.1 AA). */
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+@layer components {
+  /* Standard section rhythm: generous vertical breathing room. */
+  .section {
+    @apply py-16 sm:py-24 lg:py-[120px];
+  }
+  .section-tight {
+    @apply py-12 sm:py-16 lg:py-20;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-eyebrow text-accent-600;
+  }
+
+  /* Border-first card. Elevation comes from a 1px border; shadow only on lift. */
+  .card-surface {
+    @apply rounded-panel border border-line bg-paper transition-[transform,border-color,box-shadow] duration-300;
+  }
+  .card-surface:hover {
+    @apply -translate-y-1 border-accent/30 shadow-lift;
+  }
+
+  /* Gradient text accent — cyan→teal, used sparingly for emphasis words. */
+  .grad-text {
+    background: linear-gradient(120deg, #0ea5e9 0%, #14b8a6 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .container-px {
+    @apply mx-auto w-full max-w-content px-5 sm:px-6 lg:px-8;
+  }
+}
+
+@layer utilities {
+  /* Hairline grid texture for dark hero / CTA backdrops. */
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+
+  .mask-fade-x {
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+    mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  }
+
+  .will-blur {
+    will-change: filter, transform, opacity;
+  }
+}
+
+/* ── Reduced motion: kill every non-essential animation/transition ─────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,5 @@
+# Place real static assets here:
+#   /hero/water.webm + /hero/poster.jpg   (optional hero video, see README)
+#   /jobs/*.jpg                            (before/after photos)
+#   /team/*.jpg                            (technician photos)
+#   /partners/*.svg                        (supplier logos)
