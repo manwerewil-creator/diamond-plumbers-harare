@@ -36,17 +36,6 @@ export function BeforeAfter() {
               <Compare caseStudy={c} onOpen={() => setActive(c)} />
             </motion.li>
           ))}
-          {/* Placeholder slots to fill the 3×3 grid as more jobs are added. */}
-          {[1, 2, 3].map((n) => (
-            <motion.li key={`ph-${n}`} variants={staggerItem}>
-              <div className="card-surface flex aspect-[4/3] items-center justify-center text-center">
-                <p className="px-6 text-sm text-slatey">
-                  {/* REPLACE_WITH_REAL_PHOTO before/after of another completed job */}
-                  Add another completed job here
-                </p>
-              </div>
-            </motion.li>
-          ))}
         </motion.ul>
       </div>
 

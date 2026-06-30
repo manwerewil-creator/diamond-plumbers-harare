@@ -13,13 +13,13 @@ export function Logo({ className, tone = 'dark' }: { className?: string; tone?: 
         className,
       )}
     >
-      <span className={light ? 'text-white' : 'text-ink'}>Diamond</span>
+      <span className={light ? 'text-white' : 'text-ink'}>Diamon</span>
       <span
         aria-hidden
         className={cn('mx-0.5 h-3.5 w-px self-center transition-colors', light ? 'bg-white/30' : 'bg-line')}
       />
       <span className="font-medium uppercase tracking-[0.16em] text-[0.62em] text-accent-400">
-        Plumbers
+        Contractors
       </span>
     </span>
   );

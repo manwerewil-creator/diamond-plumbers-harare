@@ -57,9 +57,8 @@ export function Footer() {
           <div>
             <h3 className="text-sm font-semibold uppercase tracking-eyebrow text-white/45">Company</h3>
             <ul className="mt-4 space-y-2.5 text-sm">
-              <li><Link href="/#why" className="hover:text-accent-400">Why Diamond</Link></li>
+              <li><Link href="/#why" className="hover:text-accent-400">Why Diamon</Link></li>
               <li><Link href="/#process" className="hover:text-accent-400">How we work</Link></li>
-              <li><Link href="/#faq" className="hover:text-accent-400">FAQ</Link></li>
             </ul>
             <h3 className="mt-6 text-sm font-semibold uppercase tracking-eyebrow text-white/45">Hours</h3>
             <ul className="mt-3 space-y-1.5 text-sm text-white/60">

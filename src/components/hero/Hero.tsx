@@ -27,12 +27,14 @@ const fadeUp = {
 
 export function Hero() {
   return (
-    <section className="relative isolate flex min-h-[100svh] flex-col justify-center overflow-hidden bg-navy-950 pt-28 pb-16 text-white">
-      {/* Background photo — full bleed, aspect ratio preserved (no stretch). */}
-      <div className="absolute inset-0 -z-10">
+    <section className="relative isolate flex min-h-[88svh] flex-col justify-center overflow-hidden bg-navy-950 pt-24 pb-14 text-white sm:min-h-[92svh] sm:pt-28 sm:pb-16">
+      {/* Background photo — pinned to a fixed-height box (NOT inset-0) so that the
+          rotating headline reflowing can never resize the section and rescale the
+          cover image (that was the "zoom in/out" flicker). */}
+      <div className="absolute inset-x-0 top-0 -z-10 h-[88svh] sm:h-[92svh]">
         <Image
           src="/hero-bg.jpg"
-          alt="Diamond Plumbers technician sealing a leaking pipe with adjustable pliers"
+          alt="Diamon Contractors technician sealing a leaking pipe with adjustable pliers"
           fill
           priority
           quality={90}
@@ -47,11 +49,11 @@ export function Hero() {
       </div>
 
       <div className="container-px relative z-10">
-        <div className="mx-auto max-w-3xl text-center">
+        <div className="mx-auto max-w-2xl text-center">
           <AnimatedHeadline
             prefix="We fix"
             phrases={HERO_PHRASES}
-            className="font-display text-display-lg font-semibold text-white"
+            className="font-display text-display-sm font-semibold text-white sm:text-display"
             tailClassName="mt-1 justify-center"
             tailColorClass="text-[#EBCDA4]"
           />
@@ -61,7 +63,7 @@ export function Hero() {
             custom={0.25}
             initial="hidden"
             animate="show"
-            className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-white/80"
+            className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-white/80 sm:text-lg"
           >
             From a midnight burst pipe to a full bathroom refit, we show up, fix it properly, and
             guarantee the work. Licensed Harare plumbers,{' '}

@@ -29,7 +29,9 @@ export function ServiceHero({
 }) {
   return (
     <section className="relative isolate flex min-h-[72svh] flex-col justify-center overflow-hidden bg-navy-950 pt-28 pb-14 text-white">
-      <div className="absolute inset-0 -z-10">
+      {/* Pinned-height image box (not inset-0) so the rotating headline can't
+          resize the section and rescale the cover image. */}
+      <div className="absolute inset-x-0 top-0 -z-10 h-[72svh]">
         <Image
           src={(serviceImages[slug] ?? heroImage).src}
           alt={(serviceImages[slug] ?? heroImage).alt}

@@ -5,16 +5,14 @@
  * (…000000) so it's obvious what still needs REPLACING with the real line.
  */
 
-const RAW_PHONE = process.env.NEXT_PUBLIC_PHONE || '+263 77 200 0000'; // REPLACE_WITH_REAL_PHONE
-const RAW_WHATSAPP = process.env.NEXT_PUBLIC_WHATSAPP || '263772000000'; // REPLACE_WITH_REAL_WHATSAPP
+const RAW_PHONE = process.env.NEXT_PUBLIC_PHONE || '+263 71 921 5492';
+const RAW_WHATSAPP = process.env.NEXT_PUBLIC_WHATSAPP || '263719215492';
 
 export const site = {
-  // NOTE: existing site reads "Diamon Plumbers"; brief specifies "Diamond Plumbers".
-  // Using the brief's spelling as the canonical brand. See README.
-  name: 'Diamond Plumbers',
-  shortName: 'Diamond',
+  name: 'Diamon Contractors',
+  shortName: 'Diamon',
   tagline: "Harare's Trusted Plumbing Team",
-  legalName: 'Diamond Plumbers (Pvt) Ltd',
+  legalName: 'Diamon Contractors (Pvt) Ltd',
   city: 'Harare',
   country: 'Zimbabwe',
 
@@ -22,7 +20,7 @@ export const site = {
   phoneE164: RAW_PHONE.replace(/[^\d+]/g, ''),
   whatsapp: RAW_WHATSAPP,
 
-  email: 'hello@diamondplumbers.co.zw', // REPLACE_WITH_REAL_EMAIL
+  email: 'hello@diamoncontractors.co.zw', // REPLACE_WITH_REAL_EMAIL
   // REPLACE_WITH_REAL_ADDRESS
   address: {
     street: '12 Borrowdale Road',
@@ -57,7 +55,7 @@ export const site = {
 } as const;
 
 /** Default WhatsApp message; pages override with their own context. */
-export const defaultWhatsAppMessage = 'Hi Diamond Plumbers, I have a plumbing problem and need help.';
+export const defaultWhatsAppMessage = 'Hi Diamon Contractors, I have a plumbing problem and need help.';
 
 export type PaymentMethod = { name: string; note?: string };
 export const paymentMethods: PaymentMethod[] = [

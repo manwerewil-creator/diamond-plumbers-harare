@@ -26,8 +26,8 @@ export default function OgImage() {
         <div style={{ display: 'flex', alignItems: 'center', gap: 18 }}>
           <div style={{ width: 56, height: 56, borderRadius: 14, background: 'linear-gradient(135deg,#0EA5E9,#14B8A6)' }} />
           <div style={{ display: 'flex', gap: 10, fontSize: 30, fontWeight: 700 }}>
-            <span>Diamond</span>
-            <span style={{ color: '#38BDF8' }}>Plumbers</span>
+            <span>Diamon</span>
+            <span style={{ color: '#38BDF8' }}>Contractors</span>
           </div>
         </div>
 

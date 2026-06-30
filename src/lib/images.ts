@@ -21,7 +21,7 @@ export type Photo = { src: string; alt: string };
 export const heroImage: Photo = {
   // Higher resolution + quality than the default helper for a crisp, clear hero.
   src: `${BASE}1749532125405-70950966b0e5?auto=format&q=84&w=2400&h=1500&fit=crop&crop=entropy`,
-  alt: 'A Diamond Plumbers technician repairing pipework in a home bathroom',
+  alt: 'A Diamon Contractors technician repairing pipework in a home bathroom',
 };
 
 /** One hero/feature photo per service (keyed by slug). */

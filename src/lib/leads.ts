@@ -79,7 +79,7 @@ export async function notifyEmail(lead: LeadRecord) {
     const resend = new Resend(apiKey);
     const photoLines = lead.photo_urls.map((u) => `<li><a href="${u}">${u}</a></li>`).join('');
     await resend.emails.send({
-      from: process.env.LEAD_FROM_EMAIL || `Diamond Plumbers <onboarding@resend.dev>`,
+      from: process.env.LEAD_FROM_EMAIL || `Diamon Contractors <onboarding@resend.dev>`,
       to,
       replyTo: lead.email || undefined,
       subject: `🔧 New ${lead.urgency === 'now' ? 'URGENT ' : ''}lead — ${serviceLabel(lead.service)} (${lead.area || 'Harare'})`,
@@ -140,7 +140,7 @@ export async function confirmToCustomer(lead: LeadRecord) {
     const { Resend } = await import('resend');
     const resend = new Resend(apiKey);
     await resend.emails.send({
-      from: process.env.LEAD_FROM_EMAIL || `Diamond Plumbers <onboarding@resend.dev>`,
+      from: process.env.LEAD_FROM_EMAIL || `Diamon Contractors <onboarding@resend.dev>`,
       to: lead.email,
       subject: `We’ve got your request — ${site.name}`,
       html: `<p>Hi ${lead.name},</p>

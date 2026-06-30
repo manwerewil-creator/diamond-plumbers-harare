@@ -34,35 +34,10 @@ export function Navbar() {
 
   return (
     <header className="fixed inset-x-0 top-0 z-40 px-3 pt-2.5 sm:px-5 sm:pt-3">
-      {/* Floating liquid-glass pill — slim, transparent, refracts whatever is behind it. */}
-      <nav
-        className={cn(
-          'group/nav relative mx-auto flex h-11 max-w-[64rem] items-center justify-between gap-4 rounded-full px-2.5 pl-3.5 transition-all duration-500 ease-out sm:h-12 sm:px-3 sm:pl-5',
-          scrolled
-            ? 'border border-white/40 bg-cream/55 shadow-nav backdrop-blur-2xl backdrop-saturate-150 supports-[backdrop-filter]:bg-cream/45'
-            : 'border border-white/20 bg-white/[0.07] backdrop-blur-xl backdrop-saturate-150',
-        )}
-        style={{
-          boxShadow: scrolled
-            ? '0 1px 0 rgba(255,255,255,.55) inset, 0 -1px 0 rgba(36,24,17,.04) inset, 0 12px 34px -16px rgba(36,24,17,.28)'
-            : '0 1px 0 rgba(255,255,255,.35) inset, 0 -1px 0 rgba(255,255,255,.08) inset, 0 10px 30px -18px rgba(16,12,9,.45)',
-        }}
-      >
-        {/* Glossy specular sheen — a soft top-light that reads as polished glass */}
-        <span
-          aria-hidden
-          className="pointer-events-none absolute inset-0 overflow-hidden rounded-full"
-        >
-          <span
-            className="absolute inset-x-0 top-0 h-1/2"
-            style={{ background: 'linear-gradient(180deg, rgba(255,255,255,.28), transparent)' }}
-          />
-          <span
-            className="absolute inset-x-6 top-0 h-px"
-            style={{ background: 'linear-gradient(90deg, transparent, rgba(255,255,255,.7), transparent)' }}
-          />
-        </span>
-
+      {/* Slim, fully transparent bar — no background, border, blur or gloss.
+          Only the text/icon colours flip on scroll so it stays legible over the
+          dark hero and the light sections below. */}
+      <nav className="relative mx-auto flex h-11 max-w-[64rem] items-center justify-between gap-4 px-1 transition-all duration-300 sm:h-12 sm:px-2">
         <Link href="/" aria-label={`${site.name} home`} className="relative z-10 rounded-lg">
           <Logo tone={scrolled ? 'dark' : 'light'} />
         </Link>

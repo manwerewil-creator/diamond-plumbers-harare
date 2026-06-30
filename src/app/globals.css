@@ -33,6 +33,9 @@
     font-size: 18px;
     line-height: 1.6;
     text-rendering: optimizeLegibility;
+    /* Safety net: never allow a stray wide element to cause horizontal scroll on
+       mobile. `clip` (not `hidden`) so it doesn't break position: sticky/fixed. */
+    overflow-x: clip;
   }
 
   .tnum {

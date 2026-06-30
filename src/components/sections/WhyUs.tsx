@@ -13,7 +13,7 @@ export function WhyUs() {
     <section id="why" className="section bg-mist">
       <div className="container-px">
         <SectionHeading
-          eyebrow="Why Diamond"
+          eyebrow="Why Diamon"
           title={<>The plumber you’d trust with your house <span className="grad-text">while you’re at work.</span></>}
           intro="No mystery call-out fees. No “we’ll see when we get there.” Just licensed technicians, fixed prices, and work we put our name behind."
         />
