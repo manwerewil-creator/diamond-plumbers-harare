@@ -44,16 +44,16 @@ export function ServicesBand() {
               <motion.div key={s.slug} variants={staggerItem} className={cn('min-h-[220px]', SPANS[i])}>
                 <Link
                   href={`/services/${s.slug}`}
-                  className="group relative flex h-full w-full flex-col justify-end overflow-hidden rounded-panel border border-line transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-lift focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+                  className="group relative flex h-full w-full flex-col justify-end overflow-hidden rounded-panel border border-accent/15 transition-[transform,box-shadow,border-color] duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] hover:-translate-y-1.5 hover:border-accent/30 hover:shadow-lift focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
                 >
                   <Image
                     src={photo.src}
                     alt={photo.alt}
                     fill
                     sizes={featured ? '(max-width:1024px) 100vw, 50vw' : '(max-width:640px) 100vw, (max-width:1024px) 50vw, 25vw'}
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    className="object-cover transition-transform duration-[800ms] ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-[1.06]"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/45 to-navy-950/5" />
+                  <div className="bento-scrim absolute inset-0" />
 
                   <span className="absolute left-5 top-5 grid h-11 w-11 place-items-center rounded-card bg-cream/90 text-ink backdrop-blur-sm">
                     <Icon name={s.icon} width={22} height={22} />
@@ -65,13 +65,13 @@ export function ServicesBand() {
                   )}
 
                   <div className="relative z-10 p-5 text-white sm:p-6">
-                    <h3 className={cn('font-display font-semibold leading-tight', featured ? 'text-2xl sm:text-3xl' : 'text-xl')}>
+                    <h3 className={cn('text-shadow-soft font-display font-semibold leading-tight', featured ? 'text-2xl sm:text-3xl' : 'text-lg sm:text-xl')}>
                       {s.title}
                     </h3>
-                    {featured && <p className="mt-2 max-w-sm text-[15px] leading-relaxed text-white/80">{s.short}</p>}
-                    <span className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-white/90">
+                    {featured && <p className="mt-2 max-w-sm text-[15px] leading-relaxed text-white/85 [text-shadow:0_1px_8px_rgba(16,10,6,0.5)]">{s.short}</p>}
+                    <span className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-white/95 [text-shadow:0_1px_6px_rgba(16,10,6,0.5)]">
                       Learn more
-                      <Icon name="arrow" width={16} height={16} className="transition-transform duration-300 group-hover:translate-x-1" />
+                      <Icon name="arrow" width={16} height={16} className="transition-transform duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:translate-x-1.5" />
                     </span>
                   </div>
                 </Link>

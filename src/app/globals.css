@@ -13,6 +13,10 @@
     --border: 36 35% 85%;
     --ring: 27 39% 30%;
     --radius: 0.875rem;
+
+    /* Strong custom easings — the built-in CSS curves are too weak (Emil). */
+    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+    --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
   }
 
   * {
@@ -78,6 +82,24 @@
   }
   .card-surface:hover {
     @apply -translate-y-1 border-accent/30 shadow-lift;
+  }
+
+  /* Warm legibility scrim for photo tiles (bento / service cards). A lighter
+     espresso-brown wash — strong at the base so white copy stays crisp, fading
+     to clear at the top so the photo reads. Replaces the near-black overlay. */
+  .bento-scrim {
+    background:
+      linear-gradient(
+        to top,
+        rgba(28, 18, 11, 0.92) 0%,
+        rgba(46, 31, 20, 0.66) 32%,
+        rgba(74, 53, 38, 0.22) 64%,
+        rgba(74, 53, 38, 0) 100%
+      );
+  }
+  /* Keep titles readable even where a photo is bright behind them. */
+  .text-shadow-soft {
+    text-shadow: 0 1px 2px rgba(16, 10, 6, 0.55), 0 2px 14px rgba(16, 10, 6, 0.35);
   }
 
   /* Brown → caramel gradient text for emphasis words. */

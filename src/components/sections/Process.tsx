@@ -36,8 +36,9 @@ export function Process() {
             />
             <defs>
               <linearGradient id="processGrad" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0%" stopColor="#0EA5E9" />
-                <stop offset="100%" stopColor="#14B8A6" />
+                <stop offset="0%" stopColor="#6B4A2F" />
+                <stop offset="50%" stopColor="#A9743F" />
+                <stop offset="100%" stopColor="#EBCDA4" />
               </linearGradient>
             </defs>
           </svg>

@@ -14,7 +14,7 @@ export function FinalCTA() {
       <div className="absolute inset-0 bg-grid opacity-40" aria-hidden />
       <motion.div
         className="absolute left-1/2 top-1/2 h-[60vh] w-[60vh] -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl"
-        style={{ background: 'radial-gradient(circle, rgba(14,165,233,0.25), transparent 65%)' }}
+        style={{ background: 'radial-gradient(circle, rgba(169,116,63,0.28), transparent 65%)' }}
         animate={{ scale: [1, 1.12, 1] }}
         transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
         aria-hidden

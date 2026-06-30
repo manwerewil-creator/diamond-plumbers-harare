@@ -8,7 +8,6 @@ import { JsonLd } from '@/components/JsonLd';
 import { QuoteModalProvider } from '@/components/quote/QuoteModalProvider';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
-import { EmergencyBanner } from '@/components/layout/EmergencyBanner';
 import { WhatsAppFloat } from '@/components/layout/WhatsAppFloat';
 
 // Single typeface site-wide (Rylo Labz approach): Inter Tight at varying weights.
@@ -77,7 +76,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           />
         )}
         <QuoteModalProvider>
-          <EmergencyBanner />
           <Navbar />
           <main id="main">{children}</main>
           <Footer />

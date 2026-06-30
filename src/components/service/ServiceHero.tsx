@@ -1,8 +1,8 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { HeroBackground } from '@/components/hero/HeroBackground';
 import { AnimatedHeadline } from '@/components/hero/AnimatedHeadline';
 import { MagneticButton } from '@/components/hero/MagneticButton';
 import { QuoteButton } from '@/components/quote/QuoteButton';
@@ -28,8 +28,20 @@ export function ServiceHero({
   emergency?: boolean;
 }) {
   return (
-    <section className="relative isolate flex min-h-[72svh] flex-col justify-center overflow-hidden pt-28 pb-14 text-white">
-      <HeroBackground photo={serviceImages[slug] ?? heroImage} />
+    <section className="relative isolate flex min-h-[72svh] flex-col justify-center overflow-hidden bg-navy-950 pt-28 pb-14 text-white">
+      <div className="absolute inset-0 -z-10">
+        <Image
+          src={(serviceImages[slug] ?? heroImage).src}
+          alt={(serviceImages[slug] ?? heroImage).alt}
+          fill
+          priority
+          quality={85}
+          sizes="100vw"
+          className="object-cover object-center"
+        />
+        <div className="hero-veil absolute inset-0" />
+        <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-navy-950 via-navy-950/55 to-transparent" />
+      </div>
       <div className="container-px relative z-10">
         <motion.nav
           initial={{ opacity: 0, y: 8 }}

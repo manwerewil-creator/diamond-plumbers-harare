@@ -1,7 +1,7 @@
 'use client';
 
+import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { HeroBackground } from '@/components/hero/HeroBackground';
 import { AnimatedHeadline } from '@/components/hero/AnimatedHeadline';
 import { MagneticButton } from '@/components/hero/MagneticButton';
 import { TrustStrip } from '@/components/hero/TrustStrip';
@@ -27,8 +27,24 @@ const fadeUp = {
 
 export function Hero() {
   return (
-    <section className="relative isolate flex min-h-[100svh] flex-col justify-center overflow-hidden pt-28 pb-16 text-white">
-      <HeroBackground />
+    <section className="relative isolate flex min-h-[100svh] flex-col justify-center overflow-hidden bg-navy-950 pt-28 pb-16 text-white">
+      {/* Background photo — full bleed, aspect ratio preserved (no stretch). */}
+      <div className="absolute inset-0 -z-10">
+        <Image
+          src="/hero-bg.jpg"
+          alt="Diamond Plumbers technician sealing a leaking pipe with adjustable pliers"
+          fill
+          priority
+          quality={90}
+          sizes="100vw"
+          className="object-cover object-center"
+        />
+        {/* Warm espresso veil — center-weighted so the white headline reads over
+            the bright pipe + water, fading the edges into the espresso base. */}
+        <div className="hero-veil absolute inset-0" />
+        <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-navy-950 via-navy-950/55 to-transparent" />
+        <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-navy-950/70 to-transparent" />
+      </div>
 
       <div className="container-px relative z-10">
         <div className="mx-auto max-w-3xl text-center">
