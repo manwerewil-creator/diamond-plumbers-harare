@@ -34,10 +34,15 @@ export function Navbar() {
 
   return (
     <header className="fixed inset-x-0 top-0 z-40 px-3 pt-2.5 sm:px-5 sm:pt-3">
-      {/* Slim, fully transparent bar — no background, border, blur or gloss.
-          Only the text/icon colours flip on scroll so it stays legible over the
-          dark hero and the light sections below. */}
-      <nav className="relative mx-auto flex h-11 max-w-[64rem] items-center justify-between gap-4 px-1 transition-all duration-300 sm:h-12 sm:px-2">
+      {/* Slim transparent bar inside a nicely rounded pill outline. No fill, blur
+          or gloss — just a hairline border; text + border colours flip on scroll
+          so it stays legible over the dark hero and the light sections below. */}
+      <nav
+        className={cn(
+          'relative mx-auto flex h-11 max-w-[64rem] items-center justify-between gap-4 rounded-full border px-3 pl-4 transition-colors duration-300 sm:h-12 sm:px-4 sm:pl-5',
+          scrolled ? 'border-ink/15' : 'border-white/30',
+        )}
+      >
         <Link href="/" aria-label={`${site.name} home`} className="relative z-10 rounded-lg">
           <Logo tone={scrolled ? 'dark' : 'light'} />
         </Link>
