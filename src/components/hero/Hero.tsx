@@ -3,7 +3,6 @@
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { AnimatedHeadline } from '@/components/hero/AnimatedHeadline';
-import { MagneticButton } from '@/components/hero/MagneticButton';
 import { TrustStrip } from '@/components/hero/TrustStrip';
 import { ScrollIndicator } from '@/components/hero/ScrollIndicator';
 import { QuoteButton } from '@/components/quote/QuoteButton';
@@ -76,15 +75,15 @@ export function Hero() {
             custom={0.4}
             initial="hidden"
             animate="show"
-            className="mt-9 flex flex-col items-center gap-3 sm:flex-row sm:justify-center"
+            className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center"
           >
-            <MagneticButton className="w-full sm:w-auto">
-              <QuoteButton size="xl" source="hero" className="w-full sm:w-[260px]">
-                Get a free quote
-              </QuoteButton>
-            </MagneticButton>
+            {/* Fixed buttons (no magnetic pull). The Button variants already carry a
+                subtle hover lift + shadow, so the motion stays gentle. */}
+            <QuoteButton size="lg" source="hero" className="w-full sm:w-[230px]">
+              Get a free quote
+            </QuoteButton>
 
-            <Button asChild variant="emergency" size="xl" className="w-full sm:w-[260px]">
+            <Button asChild variant="emergency" size="lg" className="w-full sm:w-[230px]">
               <a href={`tel:${site.phoneE164}`} aria-label={`Emergency, call ${site.phoneDisplay}`}>
                 <span className="relative mr-1 flex h-2.5 w-2.5">
                   <span className="absolute inline-flex h-full w-full animate-live-dot rounded-full bg-white/90" />
