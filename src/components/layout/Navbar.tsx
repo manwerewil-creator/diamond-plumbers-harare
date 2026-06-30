@@ -33,63 +33,76 @@ export function Navbar() {
   }, [open]);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-40 px-3 pt-3 sm:px-5 sm:pt-4">
-      {/* Floating liquid-glass pill — transparent, refracts whatever is behind it. */}
+    <header className="fixed inset-x-0 top-0 z-40 px-3 pt-2.5 sm:px-5 sm:pt-3">
+      {/* Floating liquid-glass pill — slim, transparent, refracts whatever is behind it. */}
       <nav
         className={cn(
-          'relative mx-auto flex h-14 max-w-content items-center justify-between gap-4 rounded-full px-3 pl-4 transition-all duration-300 sm:h-16 sm:px-4 sm:pl-6',
+          'group/nav relative mx-auto flex h-11 max-w-[64rem] items-center justify-between gap-4 rounded-full px-2.5 pl-3.5 transition-all duration-500 ease-out sm:h-12 sm:px-3 sm:pl-5',
           scrolled
-            ? 'border border-line bg-cream/70 shadow-nav backdrop-blur-xl supports-[backdrop-filter]:bg-cream/60'
-            : 'border border-white/15 bg-white/[0.06] backdrop-blur-md',
+            ? 'border border-white/40 bg-cream/55 shadow-nav backdrop-blur-2xl backdrop-saturate-150 supports-[backdrop-filter]:bg-cream/45'
+            : 'border border-white/20 bg-white/[0.07] backdrop-blur-xl backdrop-saturate-150',
         )}
+        style={{
+          boxShadow: scrolled
+            ? '0 1px 0 rgba(255,255,255,.55) inset, 0 -1px 0 rgba(36,24,17,.04) inset, 0 12px 34px -16px rgba(36,24,17,.28)'
+            : '0 1px 0 rgba(255,255,255,.35) inset, 0 -1px 0 rgba(255,255,255,.08) inset, 0 10px 30px -18px rgba(16,12,9,.45)',
+        }}
       >
-        {/* Specular top edge */}
+        {/* Glossy specular sheen — a soft top-light that reads as polished glass */}
         <span
           aria-hidden
-          className="pointer-events-none absolute inset-x-0 top-0 h-px rounded-full"
-          style={{ background: 'linear-gradient(90deg, transparent, rgba(255,255,255,.5), transparent)' }}
-        />
+          className="pointer-events-none absolute inset-0 overflow-hidden rounded-full"
+        >
+          <span
+            className="absolute inset-x-0 top-0 h-1/2"
+            style={{ background: 'linear-gradient(180deg, rgba(255,255,255,.28), transparent)' }}
+          />
+          <span
+            className="absolute inset-x-6 top-0 h-px"
+            style={{ background: 'linear-gradient(90deg, transparent, rgba(255,255,255,.7), transparent)' }}
+          />
+        </span>
 
         <Link href="/" aria-label={`${site.name} home`} className="relative z-10 rounded-lg">
           <Logo tone={scrolled ? 'dark' : 'light'} />
         </Link>
 
-        <ul className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-7 lg:flex">
+        <ul className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-6 lg:flex">
           {NAV.map((item) => (
             <li key={item.href}>
               <Link
                 href={item.href}
                 className={cn(
-                  'group relative text-sm font-medium transition-colors',
-                  scrolled ? 'text-muted hover:text-ink' : 'text-white/85 hover:text-white',
+                  'group relative text-[13px] font-medium tracking-tight transition-colors',
+                  scrolled ? 'text-muted hover:text-ink' : 'text-white/80 hover:text-white',
                 )}
               >
                 {item.label}
-                <span className={cn('absolute -bottom-1.5 left-0 h-px w-0 transition-all duration-300 group-hover:w-full', scrolled ? 'bg-ink' : 'bg-white')} />
+                <span className={cn('absolute -bottom-1 left-0 h-px w-0 transition-all duration-300 group-hover:w-full', scrolled ? 'bg-ink' : 'bg-white')} />
               </Link>
             </li>
           ))}
         </ul>
 
-        <div className="relative z-10 hidden items-center gap-2 sm:flex">
+        <div className="relative z-10 hidden items-center gap-1.5 sm:flex">
           <a
             href={`tel:${site.phoneE164}`}
-            className={cn('inline-flex items-center gap-2 rounded-full px-3.5 py-2 text-sm font-medium tnum transition-colors', scrolled ? 'text-ink hover:bg-ink/5' : 'text-white/85 hover:text-white hover:bg-white/10')}
+            className={cn('inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-[13px] font-medium tnum transition-colors', scrolled ? 'text-ink hover:bg-ink/5' : 'text-white/80 hover:text-white hover:bg-white/10')}
           >
-            <Icon name="phone" width={16} height={16} /> {site.phoneDisplay}
+            <Icon name="phone" width={15} height={15} /> {site.phoneDisplay}
           </a>
-          <QuoteButton size="sm" source="navbar" withArrow={false}>Free quote</QuoteButton>
+          <QuoteButton size="sm" source="navbar" withArrow={false} className="h-9 px-4 text-[13px]">Free quote</QuoteButton>
         </div>
 
         {/* Mobile */}
-        <div className="relative z-10 flex items-center gap-2 sm:hidden">
-          <QuoteButton size="sm" source="navbar-mobile" withArrow={false}>Quote</QuoteButton>
+        <div className="relative z-10 flex items-center gap-1.5 sm:hidden">
+          <QuoteButton size="sm" source="navbar-mobile" withArrow={false} className="h-8 px-3.5 text-[13px]">Quote</QuoteButton>
           <button
             onClick={() => setOpen(true)}
             aria-label="Open menu"
-            className={cn('grid h-10 w-10 place-items-center rounded-full', scrolled ? 'text-ink hover:bg-ink/5' : 'text-white hover:bg-white/10')}
+            className={cn('grid h-8 w-8 place-items-center rounded-full', scrolled ? 'text-ink hover:bg-ink/5' : 'text-white hover:bg-white/10')}
           >
-            <Icon name="menu" width={22} height={22} />
+            <Icon name="menu" width={20} height={20} />
           </button>
         </div>
       </nav>
